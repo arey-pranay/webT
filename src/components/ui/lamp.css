@@ -1,0 +1,63 @@
+.box {
+  /* width: 60vmin; */
+  /* height: 50vmin; */
+  display: grid;
+  place-content: center;
+  color: white;
+  text-shadow: 0 1px 0 #000;
+  --border-angle: 0turn;
+  --main-bg: conic-gradient(
+    from var(--border-angle),
+    #000,
+    #000 5%,
+    #000 60%,
+    #000 95%
+  );
+  border: solid 5px transparent;
+  /* border-radius: 2em; */
+  --gradient-border: conic-gradient(
+    from var(--border-angle),
+    transparent 25%,
+    rgb(158, 6, 189),
+    rgb(233, 145, 247) 99%,
+    transparent
+  );
+  background: var(--main-bg) padding-box, var(--gradient-border) border-box,
+    var(--main-bg) border-box;
+  background-position: center center;
+  animation: bg-spin 2s linear infinite;
+}
+
+.box:hover {
+  animation-play-state: paused;
+}
+
+@keyframes bg-spin {
+  to {
+    --border-angle: 1turn;
+  }
+}
+
+@property --border-angle {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0turn;
+}
+
+@keyframes moveBackground {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-moveBackground {
+  animation: moveBackground 1s infinite alternate-reverse;
+}
+
+/* Stop animation on hover */
+button:hover .animate-moveBackground {
+  animation-play-state: paused;
+}
